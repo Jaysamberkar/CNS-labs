@@ -1,0 +1,160 @@
+CNS LABS 
+CEASER CIPHER 
+It works by shifting the letters in the plaintext message by a certain number of positions, known as the “shift” or “key”.
+
+ 
+AES & Modes of Operation. 
+Cipher block chaining 
+1.	 Generate plaintext 
+2.	Generate key text 
+3.	Generate IV 
+4.	Paste IV in the part V 
+5.	Paste IV in 1st xor input & paste first input PT in 2nd xor input then calculate 
+6.	Paste XOR in part IV PT, then paste key text in part IV key, encrypt .
+7.	Pate ciphertext in part V behind IV (append it)
+8.	 Paste CT in 1st Xor input & paste second inpiut PT in 2nd xor input, calculate.
+9.	Paste XOR in part IV PT, Key doesn’t change, encrypt.
+10.	Repeat step 7
+11.	Repeat 8,9,10. Till it finishes. 
+12.	Check answer for correct. 
+
+Output feedback 
+1.	Generate IV , PT and Key 
+2.	Paste IV in part V and plane text input of part IV .
+3.	Paste key in key of part IV, encrypt.
+4.	Paste CT in 1st input of part III, first input of PT in 2nd XOR input, calculate.
+5.	Append XOR in part V 
+6.	Take CT and paste in PT of part IV, encrypt.
+7.	Paste CT in 1st input of XOR, second input of PT in 2nd XOR input, calculate.
+8.	Append XOR in part V 
+9.	Repeat 6 7 8 tillit finishes. 
+10.	Check for correct. 
+
+Break the give shift cipher 
+1.	Copy the cipher text in pt1 and paste in ciphertext of pt3.
+2.	Select shift key and decrypt.
+3.	Paste the decrypt from plaintext of part 3 in part 2 in format “shift_no - decrypt”
+4.	Keep doing till you find something meaningful. 
+5.	Paste the meaningful decrypt with key no. in part4 and check answer.
+ 
+Monoalphabetic substitution…ttb either will come
+ 
+Playfaire and vigenere…same website..pt given, key given, encrypt and verify dcoce.fr 
+1)	Vigenere cipher 
+i)	In encoder, type plain text,key,and encrypt.
+ii)	Copy ciphertext from above and paste in decoder ciphertext. 
+iii)	Type info as per question, decrypt.
+
+Diagram will come for lab3 
+Rsa and digital signature 
+Hashing, hash 2 or 3 files save it in other file. Auditing, positive matching mode. 
+1)	Hashdeep filename
+2)	Hashdeep -s filename //supress
+3)	 Hashdeep -c sha1,sha256,tiger,md5 filename 
+4)	Hashdeep -c md5 *.txt
+5)	Hashdeep -c md5 -p 100 example.txt
+6)	Hashdeep c md5 -r /home/sachi/myfiles //recursive
+7)	Hashdeep -c md5 *.txt > hashset.txt
+8)	Cat hashset.txt
+9)	Md5deep -m hashset.txt * //o/p in matching mode
+10)	Md5deep -s -x hashset.txt * //o/p in negative mode 
+11)	hashdeep -a -r -k hashset1.txt /home/shachi/myfiles
+12)	touch /home/sachi/myfiles/newfile.txt
+hashdeep -a -r -k hashset1.txt /home/sachi/myfiles 
+13)	To get where it failed use the command with -v option
+hashdeep -v -a -r -k hashset1.txt /home/shachi/myfiles
+14)	 Move one of the files to another directory and audit n see output 
+mv /home/shachi/myfiles/example.txt /tmp
+hashdeep -v -a -r -k hashset1.txt /home/shachi/myfiles
+15)	 Rename one of the files and audit n see the output 
+mv /home/shachi/myfiles/shachi.txt /home/shachi/myfiles/shachi.bak 
+hashdeep -v -a -r -k hashset1.txt /home/shachi/myfiles
+16)	For verbose output of audit 
+hashdeep -vv -a -r -k hashset1.txt /home/shachi/myfiles
+hashdeep -vvv -a -r -k hashset1.txt /home/shachi/myfiles
+
+Recon tools… 5 or 6 tools in lab will come. What is whois dig etc.  wvebto Dimitri 
+sudo apt install whois
+Enter the password
+whois 205.251.242.103
+//thats an ipv4 address of amazon//
+//you can also check for domain names, for e.g.//
+whois google.com or whois youtube.com
+----traceroute
+sudo apt install traceroute
+traceroute youtube.com or facebook.com or google.com etc
+traceroute <any ipv4 address> 
+//for e.g.//
+traceroute 172.217.14.238
+----dig
+sudo apt install dnsutils
+dig google.com
+dig google.com ANY
+dig -x <ip address> 
+//for e.g.//
+dig -x 172.217.14.238
+dig +noall +answer -x 172.217.14.238  
+---- nslookup
+nslookup youtube.com
+nslookup   -type=ns [youtube.com]
+nslookup -type=ns youtube.com
+sudo apt install dnsutils -y
+nslookup 192.168.0.10
+nslookup -type=ns  [google.com]
+nslookup -type=ns google.com
+-----nikto------
+sudo apt install nikto -y
+nikto -h youtube.com
+nikto -h tsec.edu
+----dmitry---
+sudo apt install git
+cd desktop/ cd downloads
+git clone https://github.com/jaygreig86/dmitry.git
+dmitry -winespo example.txt google.com
+sudo apt install dmitry
+Wireshark + nmap. 
+Tcpsyn: nmap -sS www.google.com
+Udp: nmap -SU -v felix 
+Nmap's UDP scan sends UDP packets to target ports and analyzes the responses to identify open ports
+Tcpfin: nmap -sF www.google.com
+When a FIN (Finish) flag is sent to a closed port, an ideal response should be a TCP RST (Reset) indicating the port is closed
+Null :nmap -sN www.google.com
+A	null scan in Nmap is a stealthy port scanning technique where the TCP header flags, particularly the SYN, FIN, and RST flags, are intentionally omitted during connection attempts to target ports. This approach seeks to exploit certain operating system behaviors that result in varying responses. If the port is open, a lack of response suggests a filtered state, while an RST response indicates a closed port. Null scans are useful for evading basic firewall rules and gaining insights into the target's state while minimizing detection. 
+
+Xmas: nmap -sX www.google.com
+This scan is used to identify open ports on a target system by observing how it responds to these non-standard combinations of flags
+Tcpack: nmap -sA www.google.com
+Tcpconnect: nmap -sT tsec.edu
+Ipscan : nmap -sO www.google.com 
+Ping: nmap -sP www.yahoo.com
+Osdetection : nmap -sO www.yahoo.com 
+
+Dos attack using hping3 ….perform attack, random src/your machine/given src.
+
+Email gpg, create sender receiver key, receivers key inn key ring, send message to receiver and encrypt.
+1)	gpg --gen-key
+2)	gpg --export -a your.email@example.com > public_key.asc
+3)	gpg --import public_key.asc
+4)	gpg --export-secret-key -a your.email@example.com > private_key.asc
+5)	gpg --import private_key.asc
+6)	 gpg --list-keys
+7)	gpg --sign-key receiver_email
+8)	gpg --encrypt -r receiver_email name_of_file
+9)	gpg -o myfiledecrypted -d myfile.txt.gpg
+Configure iptable to accept all packets, drop packets, insert rule like ssh  
+Configure firewall to accept 
+‘sudo iptables -A <CHAIN> -p <PROTOCOL> --dport <PORT> -j <ACTION>’:
+sudo iptables -I <CHAIN> <RULE_NUMBER>
+Allow incoming traffic on specific ports 
+sudo iptables -A INPUT -p tcp --dport ssh -j ACCEPT
+Allow all incoming web ytraffic 
+sudo iptables -A INPUT -j DROP
+sudo iptables -L 
+blocking traffic 
+sudo iptables -A INPUT -j DROP
+sudo iptables -L
+editing tables
+sudo iptables -I INPUT 1 -i lo -j ACCEPT
+sudo iptables -L
+No ids just theory 
+
